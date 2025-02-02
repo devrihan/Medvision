@@ -53,22 +53,66 @@ st.subheader("Transforming medical imaging with AI-powered insights.")
 uploaded_file = st.file_uploader("Upload the medical image and let the AI do the rest!", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
-    st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
+    st.image(uploaded_file, caption="Uploaded Image", width=700)
     submit = st.button("Generate the Analysis")
-    
+
     if submit:
         image_data = uploaded_file.read()
-        file = upload_to_gemini(image_data, mime_type="image/png")
         
+        loading_placeholder = st.empty()
+
+        with loading_placeholder.container():
+            st.markdown(
+                """
+                <style>
+                .loading-screen {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #0E1117;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 9999;
+                    font-size: 24px;
+                    font-weight: bold;
+                }
+                .blinking-dot {
+                    width: 12px;
+                    height: 12px;
+                    background-color: green;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                    animation: blink 1s infinite;
+                }
+                @keyframes blink {
+                    0% { opacity: 1; }
+                    50% { opacity: 0; }
+                    100% { opacity: 1; }
+                }
+                </style>
+                <div class="loading-screen">
+                    <div class="blinking-dot"></div>
+                    <span>Analyzing the Image... Please wait</span>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        file = upload_to_gemini(image_data, mime_type="image/png")
         chat_session = model.start_chat(history=[
             {"role": "user", "parts": [file, "Analyze this medical image and provide insights."]},
         ])
-        
         response = chat_session.send_message("Provide a detailed analysis of the uploaded image.")
         analysis_text = response.text
+
+        loading_placeholder.empty()
         
         st.subheader("AI Analysis Result:")
-        st.write(response.text)
+        st.write(analysis_text)
+
 
 st.markdown("""
     <br><br>
