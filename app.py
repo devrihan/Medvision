@@ -88,7 +88,7 @@ if uploaded_file:
                     position: fixed;
                     top: 0;
                     left: 0;
-                    width: 80%;
+                    width: 100%;
                     height: 100%;
                     background-color: #0E1117;
                     display: flex;
