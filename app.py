@@ -52,8 +52,27 @@ st.subheader("Transforming medical imaging with AI-powered insights.")
 
 uploaded_file = st.file_uploader("Upload the medical image and let the AI do the rest!", type=["jpg", "jpeg", "png"])
 
+
+import base64
+
+st.markdown(
+    """
+    <style>
+        .uploaded-img {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 if uploaded_file:
-    st.image(uploaded_file, caption="Uploaded Image", width=700)
+    st.image(uploaded_file, caption="Uploaded Image", use_container_width=700)
+    image_data = base64.b64encode(uploaded_file.getvalue()).decode("utf-8")
+
     submit = st.button("Generate the Analysis")
 
     if submit:
@@ -79,6 +98,7 @@ if uploaded_file:
                     font-size: 24px;
                     font-weight: bold;
                 }
+     
                 .blinking-dot {
                     width: 12px;
                     height: 12px;
