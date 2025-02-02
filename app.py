@@ -3,7 +3,7 @@ from pathlib import Path
 import google.generativeai as genai
 import tempfile  # Import tempfile module to handle temporary files
 
-from api_key import api_key  # Ensure this file contains your API key
+api_key = st.secrets["api_key"]
 
 genai.configure(api_key=api_key)
 
