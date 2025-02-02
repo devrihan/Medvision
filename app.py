@@ -92,7 +92,6 @@ if uploaded_file:
                     height: 100%;
                     background-color: #0E1117;
                     display: flex;
-                    flex-direction: column;
                     justify-content: center;
                     align-items: center;
                     z-index: 9999;
