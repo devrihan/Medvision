@@ -88,7 +88,7 @@ if uploaded_file:
                     position: fixed;
                     top: 0;
                     left: 0;
-                    width: 100%;
+                    width: 80%;
                     height: 100%;
                     background-color: #0E1117;
                     display: flex;
@@ -102,6 +102,9 @@ if uploaded_file:
                 .blinking-dot {
                     width: 12px;
                     height: 12px;
+
+
+                    
                     background-color: green;
                     border-radius: 50%;
                     margin-right: 10px;
