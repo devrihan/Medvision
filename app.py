@@ -1,13 +1,12 @@
 import streamlit as st
 from pathlib import Path
 import google.generativeai as genai
-import tempfile  # Import tempfile module to handle temporary files
+import tempfile 
 
 api_key = st.secrets["api_key"]
 
 genai.configure(api_key=api_key)
 
-# Configure AI model
 generation_config = {
     "temperature": 1,
     "top_p": 0.95,
@@ -39,10 +38,10 @@ model = genai.GenerativeModel(
 def upload_to_gemini(image_data, mime_type="image/png"):
     """Saves image data as a temporary file and uploads it to Gemini."""
     with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_file:
-        temp_file.write(image_data)  # Write image bytes to the temp file
-        temp_file_path = temp_file.name  # Get the file path
+        temp_file.write(image_data)  
+        temp_file_path = temp_file.name  
     
-    file = genai.upload_file(temp_file_path, mime_type=mime_type)  # Upload to Gemini
+    file = genai.upload_file(temp_file_path, mime_type=mime_type)  
     return file
 
 st.set_page_config(page_title="MedVision", page_icon="🧠")
@@ -54,7 +53,7 @@ st.subheader("Transforming medical imaging with AI-powered insights.")
 uploaded_file = st.file_uploader("Upload the medical image and let the AI do the rest!", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
-    st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
+    st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
     submit = st.button("Generate the Analysis")
     
     if submit:
