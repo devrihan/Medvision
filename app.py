@@ -92,6 +92,7 @@ if uploaded_file:
                     height: 100%;
                     background-color: #0E1117;
                     display: flex;
+                    flex-direction: column;
                     justify-content: center;
                     align-items: center;
                     z-index: 9999;
@@ -100,11 +101,9 @@ if uploaded_file:
                 }
      
                 .blinking-dot {
-                    width: 12px;
-                    height: 12px;
-
-
-                    
+                    width: 15px;
+                    height: 15px;
+                    margin-bottom: 5px;
                     background-color: green;
                     border-radius: 50%;
                     margin-right: 10px;
