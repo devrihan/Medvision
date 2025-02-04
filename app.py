@@ -44,10 +44,7 @@ def upload_to_gemini(image_data, mime_type="image/png"):
     file = genai.upload_file(temp_file_path, mime_type=mime_type)  
     return file
 
-st.set_page_config(page_title="MedVision", page_icon="🧠")
-st.image("IMG_20250201_225611.png", width=150)
-
-st.title("MedVision: AI for Medical Imaging")
+st.set_page_config(page_title="Medical Image Analysis", page_icon="🧠")
 st.subheader("Transforming medical imaging with AI-powered insights.")
 
 uploaded_file = st.file_uploader("Upload the medical image and let the AI do the rest!", type=["jpg", "jpeg", "png"])
@@ -100,9 +97,8 @@ if uploaded_file:
                 }
      
                 .blinking-dot {
-                    width: 15px;
-                    height: 15px;
-                    margin-bottom: 5px;
+                    width: 8px;
+                    height: 8px;
                     background-color: green;
                     border-radius: 50%;
                     margin-right: 10px;
@@ -133,6 +129,8 @@ if uploaded_file:
         
         st.subheader("AI Analysis Result:")
         st.write(analysis_text)
+
+        
 
 
 st.markdown("""
